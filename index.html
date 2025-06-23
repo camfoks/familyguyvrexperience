@@ -1,59 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.5.0/dist/aframe-environment-component.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/components/sphere-collider.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/aframe-extras.controls.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/c-frame/physx@v0.2.0/dist/physx.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/aframe-blink-controls@0.4.3/dist/aframe-blink-controls.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.11/build/handy-controls.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/handy-work@3.1.11/build/magnet-helpers.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/aframe-htmlmesh@2.4.0/build/aframe-html.min.js"></script>
-        <script src="ar-shadow-helper.js"></script>
-        <script src="ar-cursor.js"></script>
-        <script src="simple-navmesh-constraint.js"></script>
-        <script src="model-utils.js"></script>
+        <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
         <script src="script.js"></script>
     </head>
     <body>
-        <audio id="background-music" src="familyguy.mp3" loop autoplay></audio>
-        <a-scene     
-        physx="autoLoad: true; delay: 1000; wasmUrl: https://cdn.jsdelivr.net/gh/c-frame/physx@v0.2.0/wasm/physx.release.wasm; useDefaultScene: false;"
-        webxr="overlayElement:#dom-overlay;"
-        background="color:skyblue;"
-        reflection="directionalLight:#dirlight;"
-        renderer="alpha:true;physicallyCorrectLights:true;colorManagement:true;exposure:2;toneMapping:ACESFilmic;"
-        ar-hit-test="target:#my-ar-objects;type:footprint;footprintDepth:0.2;"
-        shadow="type: pcfsoft"
-        gltf-model="dracoDecoderPath: https://www.gstatic.com/draco/versioned/decoders/1.5.7/;"
-        ar-cursor raycaster="objects: #my-ar-objects a-sphere"
-        xr-mode-ui="XRMode:xr">
-
-    <a-entity
-        id="cameraRig"
-        simple-navmesh-constraint="navmesh:.navmesh;fall:0.5;height:0;exclude:.navmesh-hole;"
-        movement-controls="speed:0.15;camera:#head;"
-        position="-1 0 1" rotation="0 45 0" origin-on-ar-start
-    >
-
-
-            <!-- camera rig -->
-        <a-entity id="head"
-        camera="near:0.01;"
-        look-controls="pointerLockEnabled: false"
-        position="0 1.65 0"
-      ></a-entity>
-
-       <a-entity handy-controls="right:#right-gltf;materialOverride:right;" material="color:gold;metalness:1;roughness:0;"></a-entity>
-
-        <a-gltf-model src="#watch-gltf" data-left="wrist" position="-1000 0 0">
-          <a-sphere radius="0.02" position="0 0.02 0" sphere-collider="radius:0.02;objects:[data-right$=-tip];" exit-on="hitend" visible="false"></a-sphere>
-        </a-gltf-model>
-
-        <a-entity data-left="ring-finger-phalanx-proximal">
-          <a-torus position="0 0 -0.03" radius="0.008" radius-tubular="0.001" scale="1 1 1.5" material="color:gold;metalness:1;roughness:0;"></a-torus>
-        </a-entity>
+        <audio id="background-music" src="theme.mp3" loop autoplay></audio>
+        <a-scene vr-mode-ui="enabled: true">
+            <!-- camera rig with physics -->
+            <a-entity id="player" position="0 3 8" dynamic-body="mass: 1; shape: sphere; sphereRadius: 0.5" jump>
+                <a-camera look-controls="pointerLockEnabled: true" wasd-controls="enabled: true; acceleration: 20">
+                    <a-cursor color="#FF6B6B" raycaster="objects: [character-info]"></a-cursor>
+                </a-camera>
+            </a-entity>
 
             <a-assets>
                 <a-asset-item id="peter" src="./peter.glb"></a-asset-item>
@@ -63,7 +22,6 @@
                 <a-asset-item id="chris" src="./chris.glb"></a-asset-item>
                 <a-asset-item id="meg" src="./meg.glb"></a-asset-item>
                 <a-asset-item id="brian" src="./brian.glb"></a-asset-item>
-                <a-asset-item id="watch-gltf" src="./watch.glb"></a-asset-item>
             </a-assets>
 
             <!-- Sky -->
@@ -138,7 +96,7 @@
 
             <a-entity 
                 gltf-model="#brian" 
-                position="11.6 0 5.7" 
+                position="11.6 2 5.7" 
                 scale="320 320 320"
                 rotation="0 -90 0"
                 character-info="name: Brian Griffin; description: The intellectual family dog with a martini habit!"

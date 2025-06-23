@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <a-scene physics="driver: cannon; gravity: -9.8" vr-mode-ui="enabled: true">
+            <!-- camera rig with physics -->
+            <a-entity id="player" position="0 3 8" dynamic-body="mass: 1; shape: sphere; sphereRadius: 0.5" jump>
+                <a-camera look-controls="pointerLockEnabled: true" wasd-controls="enabled: true; acceleration: 20">
+                    <a-cursor color="#FF6B6B" raycaster="objects: [character-info]"></a-cursor>
+                </a-camera>
+            </a-entity>
+
+            <a-assets>
+                <a-asset-item id="peter" src="./peter.glb"></a-asset-item>
+                <a-asset-item id="stewie" src="./stewie.glb"></a-asset-item>
+                <a-asset-item id="lois" src="./lois.glb"></a-asset-item>
+                <a-asset-item id="livingroom" src="./livingroom.glb"></a-asset-item>
+                <a-asset-item id="chris" src="./chris.glb"></a-asset-item>
+                <a-asset-item id="meg" src="./meg.glb"></a-asset-item>
+                <a-asset-item id="brian" src="./brian.glb"></a-asset-item>
+            </a-assets>
+
+            <!-- Sky -->
+            <a-sky color="#87CEEB"></a-sky>
+
+            <!-- Ground -->
+                <a-box position="0 -0.5 0" width="50" height="0.01" depth="50" 
+                   color="#7BC8A4" 
+                   material="roughness: 0.8; opacity: 0.3; transparent: true; alphaTest: 0.1; side: double"
+                   static-body shadow="receive: true"
+                   light-spawner>
+            </a-box>
+
+            <!-- 3D Characters with interaction -->
+            <a-entity 
+                gltf-model="#peter" 
+                position="-10 0 -2.6" 
+                scale="3.5 3.5 3.5"
+                rotation="0 45 0"
+                character-info="name: Peter Griffin; description: The lovable oaf patriarch of the Griffin family!"
+                static-body="shape: box"
+                shadow="cast: true">
+            </a-entity>
+
+            <a-entity 
+                gltf-model="#stewie" 
+                position="10 2 8" 
+                scale="2.9 2.9 2.9"
+                rotation="0 -110 0"
+                character-info="name: Stewie Griffin; description: The diabolical baby genius with world domination plans!"
+                static-body="shape: box"
+                shadow="cast: true">
+            </a-entity>
+
+            <a-entity 
+                gltf-model="#lois" 
+                position="-11 0 2.2" 
+                scale="3 3 3"
+                rotation="0 90 0"
+                character-info="name: Lois Griffin; description: The patient wife and mother trying to keep the family together!"
+                static-body="shape: box"
+                shadow="cast: true">
+            </a-entity>
+
+            <a-entity 
+                gltf-model="#livingroom" 
+                position="0 0 0" 
+                scale="0.5 0.5 0.5"
+                rotation="0 0 0"
+                static-body>
+            </a-entity>
+
+            <a-entity 
+                gltf-model="#chris" 
+                position="4.2 0 9" 
+                scale="3.2 3.2 3.2"
+                rotation="0 -180 0"
+                character-info="name: Chris Griffin; description: The awkward teenage son with a heart of gold!"
+                static-body="shape: box"
+                shadow="cast: true">
+            </a-entity>
+
+            <a-entity 
+                gltf-model="#meg" 
+                position="5.2 0 -5.8" 
+                scale="3.2 3.2 3.2"
+                rotation="0 -45 0"
+                character-info="name: Meg Griffin; description: The often-ignored teenage daughter of the family!"
+                static-body="shape: box"
+                shadow="cast: true">
+            </a-entity>
+
+            <a-entity 
+                gltf-model="#brian" 
+                position="11.6 0 5.7" 
+                scale="3.2 3.2 3.2"
+                rotation="0 -90 0"
+                character-info="name: Brian Griffin; description: The intellectual family dog with a martini habit!"
+                static-body="shape: box"
+                shadow="cast: true">
+            </a-entity>
+
+            <!-- UI Instructions -->
+            <a-text position="-2 6 -5" 
+                    value="Family Guy VR Experience\nUse WASD to move\nSpacebar to jump\nLook at characters and click to interact!"
+                    color="#333333" 
+                    width="8">
+            </a-text>
+
+        </a-scene>
+    </body>
+</html>

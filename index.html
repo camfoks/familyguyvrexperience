@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/aframe-teleport-controls@^6.0.0/dist/aframe-teleport-controls.min.js"></script>
+        <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
         <script src="script.js"></script>
     </head>
     <body>
-        <a-scene physics="driver: cannon; gravity: -9.8" vr-mode-ui="enabled: true">
-            <!-- camera rig with physics -->
-            <a-entity id="player"
-                      position="0 1.6 8"
-                      movement-controls="fly: false; speed: 0.15">
-                <a-camera look-controls="pointerLockEnabled: true">
-                    <a-cursor color="#FF6B6B" raycaster="objects: [character-info]"></a-cursor>
+        <audio id="background-music" src="familyguy.mp3" loop autoplay></audio>
+        <a-scene vr-mode-ui="enabled: true">
+            <!-- camera rig -->
+            <a-entity id="player" position="0 3 8">
+                <a-camera look-controls="pointerLockEnabled: true" movement-controls="enabled: true; acceleration: 20">
+                    <a-cursor color="#FF6B6B"></a-cursor>
                 </a-camera>
-                <a-entity laser-controls="hand: right" teleport-controls="cameraRig: #player; teleportOrigin: a-camera; button: trigger; collisionEntities: [static-body]"></a-entity>
             </a-entity>
 
             <a-assets>
@@ -100,7 +96,7 @@
 
             <a-entity 
                 gltf-model="#brian" 
-                position="11.6 2 5.7" 
+                position="11.6 0 5.7" 
                 scale="320 320 320"
                 rotation="0 -90 0"
                 character-info="name: Brian Griffin; description: The intellectual family dog with a martini habit!"

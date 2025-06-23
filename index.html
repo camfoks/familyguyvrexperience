@@ -10,9 +10,7 @@
         <a-scene physics="driver: cannon; gravity: -9.8" vr-mode-ui="enabled: true">
             <!-- camera rig with physics -->
             <a-entity id="player"
-                      position="0 3 8"
-                      dynamic-body="mass: 1; shape: sphere; sphereRadius: 0.5"
-                      jump
+                      position="0 1.6 8"
                       movement-controls="fly: false; speed: 0.15">
                 <a-camera look-controls="pointerLockEnabled: true">
                     <a-cursor color="#FF6B6B" raycaster="objects: [character-info]"></a-cursor>
@@ -102,8 +100,8 @@
 
             <a-entity 
                 gltf-model="#brian" 
-                position="11.6 0 5.7" 
-                scale="3.2 3.2 3.2"
+                position="11.6 2 5.7" 
+                scale="320 320 320"
                 rotation="0 -90 0"
                 character-info="name: Brian Griffin; description: The intellectual family dog with a martini habit!"
                 static-body="shape: box"

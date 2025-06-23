@@ -3,15 +3,21 @@
     <head>
         <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/aframe-teleport-controls@^6.0.0/dist/aframe-teleport-controls.min.js"></script>
         <script src="script.js"></script>
     </head>
     <body>
         <a-scene physics="driver: cannon; gravity: -9.8" vr-mode-ui="enabled: true">
             <!-- camera rig with physics -->
-            <a-entity id="player" position="0 3 8" dynamic-body="mass: 1; shape: sphere; sphereRadius: 0.5" jump>
-                <a-camera look-controls="pointerLockEnabled: true" wasd-controls="enabled: true; acceleration: 20">
+            <a-entity id="player"
+                      position="0 3 8"
+                      dynamic-body="mass: 1; shape: sphere; sphereRadius: 0.5"
+                      jump
+                      movement-controls="fly: false; speed: 0.15">
+                <a-camera look-controls="pointerLockEnabled: true">
                     <a-cursor color="#FF6B6B" raycaster="objects: [character-info]"></a-cursor>
                 </a-camera>
+                <a-entity laser-controls="hand: right" teleport-controls="cameraRig: #player; teleportOrigin: a-camera; button: trigger; collisionEntities: [static-body]"></a-entity>
             </a-entity>
 
             <a-assets>
